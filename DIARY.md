@@ -120,3 +120,37 @@ Based on the significant gap between Training and Validation results, the model 
 * **Image Resizing Limitations:** Original image sizes varied drastically (from 60x40 to 500x492). Forcing these into a 128x128 resolution may have caused information loss or distorted the subjects (cats/dogs), especially if they were positioned in corners or were exceptionally small/large, leading to a loss of useful data.
 * **Model Complexity:** For the current dataset, utilizing a 128-neuron layer along with 20 epochs might have been excessive, causing the model to memorize the data rather than learn generalized features.
 * **Data Distribution Ratios:** The Train/Val/Test ratios need to be re-evaluated to ensure better generalization and prevent the model from failing to learn deeply enough, which leads to "rote learning" (overfitting).
+
+ ## **📍 Phase 0.1: Inference Execution & Model Serialization**
+
+> *“A reality check that completely challenged my initial predictions. The workflow is now fully integrated, from training to real-world deployment.”*
+
+#### **1. Fix previous mistake**
+I added the scripting, saved the model and numbers, and checked the information through data analysis. I redeveloped the system from scratch, from data usage to training (with the same numbers and data, only adding model and number saving and testing with a set test). The model is saved with the name (model_0.1.keras).
+Created a predict file so that I can actually input any image for prediction. (predict.py)
+#### **2. Reality Check**
+
+#### **2. Reality Check & Error Analysis**
+While the model successfully integrated the inference pipeline, a manual test using 10 diverse real-world images yielded a **70% success rate (7/10 correct)**(Use Predict.py to evaluate images retrieved from the internet, manually evaluating each image one by one.). The specific failures exposed critical vulnerabilities in the Phase 0.1 architecture:
+* **Inference Logs:**
+  ```text
+  #cat_and_human.jpg   -> CAT (Confidence: 99.05%)
+  #cat_with_beard.jpg -> CAT (Confidence: 100.00%)
+  #dogs.jpg           -> DOG (Confidence: 100.00%)
+  #furrydog.png       -> DOG (Confidence: 99.98%)
+  #liecat.jpg         -> DOG (Confidence: 99.98%)   [WRONG]
+  #Mad_dog.jpg        -> DOG (Confidence: 100.00%)
+  #normaldog.png      -> DOG (Confidence: 100.00%)
+  #openmouth_cat.jpg  -> CAT (Confidence: 99.98%)
+  #packaging_cat.jpg  -> DOG (Confidence: 59.99%)   [WRONG]
+  #suprise_cat.jpg    -> DOG (Confidence: 89.07%)   [WRONG]
+#### **3. Repository Status**
+Since the dataset, hyperparameters, and core CNN structure remain completely unchanged from Phase 0.0—with the sole additions being the `model.save()` command and the `predict.py` test script (which do not alter the weights)—this checkpoint is officially labeled as **Phase 0.1**.
+
+All modified source folders, test scripts, and the validation results have been successfully pushed to the repository.
+---
+*Attached below are the visual logs of the collected inference data and prediction accuracy:*
+
+#### **4. Summary**
+In conclusion, the model still holds significant importance as a foundational milestone. However, when utilizing high-quality images, if the image contains even slightly unusual details, the probability of making an inaccurate prediction is very high—such as a cat lying on its back, with its mouth open, or placed in an unfamiliar setting. 
+Next, I will further research how to detect and predict errors to find ways to improve the model's accuracy rate.
