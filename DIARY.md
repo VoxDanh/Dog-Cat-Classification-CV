@@ -22,7 +22,7 @@
 * **Image Resizing:** Bring images to a standard 128x128 size.
 * **Data Casting:** Convert data types to `np.float32`.
 * **Pixel Normalization:** Divide pixel values by 255.0 to bring them into the [0, 1] range.
-* **Storage (.npy):** Package processed data into NumPy binary files (1.14GB).
+* **Storage (.npy):** Package processed data into NumPy binary files (4,57 GB include data.npy & label.npy).
 * **Data Shuffling:** Shuffle data with `random_state=42`.
 
 ### **2. AI Core (Algorithms & Neural Networks)**
@@ -49,7 +49,7 @@
 
 #### **2. Data Management & Logic**
 
-* `np.save()` / `np.load()`: Save and load `.npy` files (1.14GB data).
+* `np.save()` / `np.load()`: Save and load `.npy` files (4,57 GB data).
 * `shuffle(x, y, random_state=42)`: Synchronously shuffle data and labels.
 * `os.listdir()`: Browse the list of files in Cat/Dog folders.
 * `append()`: Collect image matrices and corresponding labels into a master list.
